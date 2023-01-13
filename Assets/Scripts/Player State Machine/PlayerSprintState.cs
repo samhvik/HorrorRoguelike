@@ -1,26 +1,30 @@
 using UnityEngine;
 
-public class PlayerMoveState : PlayerBaseState {
+public class PlayerSprintState : PlayerBaseState {
 
     private readonly int moveSpeedHash = Animator.StringToHash("MoveSpeed");
-    private readonly int moveBlendTreeHash = Animator.StringToHash("MoveBlendTree");
+    private readonly int sprintHash = Animator.StringToHash("Sprint");
     private const float animationDampTime = 0.1f;
     private const float crossFadeDuration = 0.1f;
 
-    public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    public PlayerSprintState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter(){
         stateMachine.velocity.y = Physics.gravity.y;
 
-        stateMachine.animator.CrossFadeInFixedTime(moveBlendTreeHash, crossFadeDuration);
+        stateMachine.animator.CrossFadeInFixedTime(sprintHash, crossFadeDuration);
+        stateMachine.movementSpeed = stateMachine.baseMovementSpeed * stateMachine.sprintModifier;
 
         stateMachine.inputReader.OnJumpPerformed += SwitchToJumpState;
-        stateMachine.inputReader.OnSprintPerformed += SwitchToSprintState;
     }
 
     public override void Tick(){
         if(!stateMachine.controller.isGrounded){
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
+        }
+
+        if(stateMachine.inputReader.moveComposite.sqrMagnitude < 1f){
+            stateMachine.SwitchState(new PlayerMoveState(stateMachine));
         }
 
         CalculateMoveDirection();
@@ -32,14 +36,10 @@ public class PlayerMoveState : PlayerBaseState {
 
     public override void Exit(){
         stateMachine.inputReader.OnJumpPerformed -= SwitchToJumpState;
-        stateMachine.inputReader.OnSprintPerformed -= SwitchToSprintState;
+        stateMachine.movementSpeed = stateMachine.baseMovementSpeed;
     }
 
     private void SwitchToJumpState(){
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
-    }
-
-    private void SwitchToSprintState(){
-        stateMachine.SwitchState(new PlayerSprintState(stateMachine));
     }
 }

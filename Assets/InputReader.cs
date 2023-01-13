@@ -9,6 +9,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions {
 
     public Action OnJumpPerformed;
 
+    public Action OnSprintPerformed;
+
     private Controls controls;
 
     private void OnEnable(){
@@ -30,6 +32,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions {
 
     public void OnMove(InputAction.CallbackContext context){
         moveComposite = context.ReadValue<Vector2>();
+    }
+
+    public void OnSprint(InputAction.CallbackContext context){
+        if(!context.performed)
+            return;
+
+        OnSprintPerformed?.Invoke();
     }
 
     public void OnJump(InputAction.CallbackContext context){
