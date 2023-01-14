@@ -10,6 +10,7 @@ public class PlayerMoveState : PlayerBaseState {
     public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter(){
+        stateMachine.currentState = "Neutral";
         stateMachine.velocity.y = Physics.gravity.y;
 
         stateMachine.animator.CrossFadeInFixedTime(moveBlendTreeHash, crossFadeDuration);

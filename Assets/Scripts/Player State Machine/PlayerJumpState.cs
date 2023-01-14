@@ -8,6 +8,8 @@ public class PlayerJumpState : PlayerBaseState {
     public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter(){
+        stateMachine.currentState = "Jumping";
+
         stateMachine.velocity = new Vector3(stateMachine.velocity.x, stateMachine.jumpForce, stateMachine.velocity.z);
 
         stateMachine.animator.CrossFadeInFixedTime(jumpHash, crossFadeDuration);

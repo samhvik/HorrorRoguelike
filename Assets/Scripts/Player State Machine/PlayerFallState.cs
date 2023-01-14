@@ -8,6 +8,8 @@ public class PlayerFallState : PlayerBaseState {
     public PlayerFallState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter(){
+        stateMachine.currentState = "Falling";
+
         stateMachine.velocity.y = 0f;
         stateMachine.animator.CrossFadeInFixedTime(fallHash, crossFadeDuration);
     }

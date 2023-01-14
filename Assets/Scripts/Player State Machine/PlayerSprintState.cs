@@ -10,6 +10,8 @@ public class PlayerSprintState : PlayerBaseState {
     public PlayerSprintState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter(){
+        stateMachine.currentState = "Sprinting";
+
         stateMachine.velocity.y = Physics.gravity.y;
 
         stateMachine.animator.CrossFadeInFixedTime(sprintHash, crossFadeDuration);
