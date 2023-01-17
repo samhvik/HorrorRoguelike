@@ -8,7 +8,6 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions {
     public Vector2 moveComposite;
 
     public Action OnJumpPerformed;
-
     public Action OnSprintPerformed;
 
     private Controls controls;
