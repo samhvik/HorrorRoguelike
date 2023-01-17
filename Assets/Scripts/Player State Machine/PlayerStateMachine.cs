@@ -18,6 +18,7 @@ public class PlayerStateMachine : StateMachine {
     public InputReader inputReader { get; private set; }
     public Animator animator { get; private set; }
     public CharacterController controller { get; private set; }
+    public PlayerHealthComponent healthComponent;
 
     // Start is called before the first frame update
     void Start() {
@@ -26,7 +27,14 @@ public class PlayerStateMachine : StateMachine {
         inputReader = GetComponent<InputReader>();
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
+        healthComponent = GetComponent<PlayerHealthComponent>();
+        healthComponent.OnDeath += SwitchToDeathState;
 
         SwitchState(new PlayerMoveState(this));
+    }
+
+    private void SwitchToDeathState(){
+        //Debug.Log("Player died!");
+        SwitchState(new PlayerDeathState(this));
     }
 }

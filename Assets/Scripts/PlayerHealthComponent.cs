@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using System;
 
 public class PlayerHealthComponent : MonoBehaviour
 {
@@ -12,7 +13,10 @@ public class PlayerHealthComponent : MonoBehaviour
     [SerializeField]
     private float invulnerabilityDurationSeconds;
 
-    public UnityEvent<PlayerHealthComponent> OnHealthChange;
+    public Action OnHealthChange;
+    public Action OnDeath;
+
+    private PlayerStateMachine stateMachine;
 
     public float health{
         get { return _health; }
@@ -26,11 +30,18 @@ public class PlayerHealthComponent : MonoBehaviour
     }
 
     void Start(){
-        
+        stateMachine = GetComponent<PlayerStateMachine>();
+    }
+
+    void Update(){
+        if(_health <= 0){
+            _health = 0;
+            FireOnDeath();
+        }
     }
 
     public void TakeDamage(float amount){
-        if(!invulnerable){
+        if(!invulnerable && _health > 0){
             _health -= Mathf.Clamp(amount, 0, health);
             StartCoroutine(BecomeInvulnerable());
             FireOnHealthChange();
@@ -38,7 +49,7 @@ public class PlayerHealthComponent : MonoBehaviour
     }
 
     private void FireOnHealthChange(){
-        OnHealthChange?.Invoke(this);
+        OnHealthChange?.Invoke();
     }
 
     private IEnumerator BecomeInvulnerable(){
@@ -49,5 +60,9 @@ public class PlayerHealthComponent : MonoBehaviour
         invulnerable = false;
         Debug.Log("Player no longer invulnerable");
 
+    }
+
+    public void FireOnDeath(){
+        OnDeath?.Invoke();
     }
 }
