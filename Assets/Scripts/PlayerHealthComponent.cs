@@ -65,4 +65,10 @@ public class PlayerHealthComponent : MonoBehaviour
     public void FireOnDeath(){
         OnDeath?.Invoke();
     }
+
+    private void OnTriggerStay(Collider other){
+        if(other.CompareTag("Enemy")){
+            this.TakeDamage(other.GetComponent<ProximityDamage>().damage);
+        }
+    }
 }

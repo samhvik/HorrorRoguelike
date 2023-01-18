@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerStateMachine : StateMachine {
 
     public string currentState = "";
-
     public Vector3 velocity;
     public float baseMovementSpeed { get; private set; } = 5f;
     public float movementSpeed = 5f;

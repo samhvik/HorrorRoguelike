@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyStateMachine : StateMachine {
 
+    public string currentState = "";
     public Vector3 velocity;
     public float baseMovementSpeed { get; private set; } = 5f;
     public float movementSpeed = 5f;
@@ -18,6 +19,6 @@ public class EnemyStateMachine : StateMachine {
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
 
-        SwitchState(new EnemyMoveState(this));
+        SwitchState(new EnemyIdleState(this));
     }
 }
