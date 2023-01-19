@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(InputReader))]
 [RequireComponent(typeof(Animator))]
@@ -32,8 +33,8 @@ public class PlayerStateMachine : StateMachine {
         SwitchState(new PlayerMoveState(this));
     }
 
-    private void SwitchToDeathState(){
-        //Debug.Log("Player died!");
+    private void SwitchToDeathState(object sender, EventArgs e){
+        Debug.Log("Player died!");
         SwitchState(new PlayerDeathState(this));
     }
 }

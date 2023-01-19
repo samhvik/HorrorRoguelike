@@ -443,7 +443,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 995544346}
         m_TargetAssemblyTypeName: PlayerHealthComponent, Assembly-CSharp
-        m_MethodName: FireOnDeath
+        m_MethodName: Die
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -865,7 +865,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 995544346}
         m_TargetAssemblyTypeName: PlayerHealthComponent, Assembly-CSharp
-        m_MethodName: TakeDamage
+        m_MethodName: Damage
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1389,6 +1389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
+  _healthMax: 100
   invulnerabilityDurationSeconds: 1
 --- !u!114 &995544347
 MonoBehaviour:
