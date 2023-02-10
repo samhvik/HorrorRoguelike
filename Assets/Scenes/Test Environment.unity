@@ -871,7 +871,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 10
+          m_FloatArgument: 26
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -1388,9 +1388,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0660054850de9644ca03d70d062ce135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  _healthMax: 100
-  invulnerabilityDurationSeconds: 1
+  health: 100
+  maxHealth: 100
+  invulnerabilityDuration: 2
 --- !u!114 &995544347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2700,7 +2700,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1991536522
+--- !u!114 &1991536524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2709,10 +2709,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1991536516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f67c60c85803a04fa5541b36adbc310, type: 3}
+  m_Script: {fileID: 11500000, guid: 0660054850de9644ca03d70d062ce135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  health: 100
+  maxHealth: 100
+  invulnerabilityDuration: 2
 --- !u!1 &2131318617
 GameObject:
   m_ObjectHideFlags: 3
